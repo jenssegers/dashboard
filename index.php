@@ -26,7 +26,7 @@ $base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/'
 <!doctype html>
 <html>
 <head>
-    <title>sandy.jenssegers.be</title>
+    <title><?php echo $system->general->name; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="<? echo $base . '/static/dark.css'; ?>">
