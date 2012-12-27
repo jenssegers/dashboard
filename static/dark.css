@@ -1,0 +1,162 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+body {
+	background: none repeat scroll 0 0 #131416;
+	color: #D5D7D6;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color:#fff;
+}
+
+#container {
+	margin: auto;
+	width: 1100px;
+}
+
+h1 {
+	color: #F1F1F1;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 67px;
+	font-weight: normal;
+	line-height: 1.1em;
+	letter-spacing: -2.5px;
+	padding: 0;
+	text-align: center;
+	margin: 60px auto;
+}
+
+@media all and (max-width: 1100px) {
+	#container {
+		width: 820px;
+	}
+}
+
+@media all and (max-width: 820px) {
+	#container {
+		width: 550px;
+	}
+	
+	h1 {
+		font-size: 55px;	
+	}
+}
+
+@media all and (max-width: 550px) {
+	#container {
+		width: 275px;
+	}
+	
+	h1 {
+		font-size: 32px;	
+	}
+}
+
+.component {
+	width: 260px;
+	height: 175px;
+	display: inline;
+	float: left;
+	margin: 5px 5px;
+    text-align: center;
+    background-color:#1D2023;
+}
+
+.header {
+	font-size: 14px;
+    font-weight: bold;
+    margin: 5px 10px;
+    text-transform: uppercase;
+    background-image: url("icon.png");
+    background-position: left 50%;
+    background-repeat: no-repeat;
+    padding-left: 14px;
+    text-align: left;
+    color: #F1F1F1;
+}
+
+.state {
+	padding: 15px 0;
+	font-size: 50px;
+	/*padding-left: 36px;*/
+	/*margin-left: 15px;*/
+	background-position: left 50%;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    margin: auto;
+    line-height: 45px;
+    height: 65px;
+}
+
+.state small {
+	display: block;
+	line-height: 18px;
+	font-size: 18px;
+}
+
+.green {
+	color: #51CE85 !important;
+}
+
+.red {
+	color: #D34F4D !important;
+}
+
+.yellow {
+	color: #EAC85D !important;
+}
+
+.gray {
+	color: #4D4E50 !important;
+}
+
+.state.up {
+	padding-left: 40px;
+	background-image: url("up.png");
+}
+
+.state.down {
+	padding-left: 40px;
+	background-image: url("down.png");
+}
+
+.state.middle {
+	padding-left: 40px;
+	background-image: url("middle.png");
+}
+
+.information {
+	color: #F1F1F1;
+	font-size: 18px;
+	text-align: center;
+}
+
+.information ul, .information li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.information li {
+	border-right: 1px dotted #4D4E50;
+	display: inline-block;
+	margin-right: 4px;
+	padding-right: 8px;
+	text-align: center;
+}
+
+.information li:last-child {
+	border: 0;
+	margin-right: 0;
+	padding-right: 0;
+}
+
+.information small {
+	font-size: 11px;
+	color: #4D4E50;
+	display: block;
+}
