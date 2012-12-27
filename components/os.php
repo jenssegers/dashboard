@@ -1,6 +1,6 @@
 <?php
 
-class General {
+class OS {
 
     function __construct() {
 
