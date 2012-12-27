@@ -53,6 +53,37 @@ class Disks {
                 $this->{$disk} = $info;
             }
         }
+
+
+        /* --------------------------------------------------------------
+         * VPS disks
+         * -------------------------------------------------------------- */
+        $paths = (array) @glob('/sys/block/xvd*', GLOB_NOSORT);
+        foreach ($paths as $path) {
+            $drive = basename($path);
+            
+            if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read(dirname(dirname($path)) . '/stat'), $matches) !== 1) {
+                $reads = 0;
+                $writes = 0;
+            } else {
+                list(, $reads, $writes) = $matches;
+            }
+            
+            $disks[$drive]['name'] = read($path);
+            $disks[$drive]['size'] = read(dirname(dirname($path)) . '/size', 0) * 512;
+            $disks[$drive]['reads'] = $reads;
+            $disks[$drive]['writes'] = $writes;
+            
+            $df = exec('df /dev/' . $drive . '1');
+            
+            if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
+                $disks[$drive]['used'] = $matches[2] * 1024;
+                $disks[$drive]['percentage'] = $disks[$drive]['used'] / $disks[$drive]['size'] * 100;
+            } else {
+                $disks[$drive]['used'] = 'NA';
+                $disks[$drive]['percentage'] = 0;
+            }
+        }
     }
 
 }
