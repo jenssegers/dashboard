@@ -74,7 +74,7 @@ class Disks {
             $disks[$drive]['reads'] = $reads;
             $disks[$drive]['writes'] = $writes;
             
-            $df = exec('df /dev/' . $drive . '1');
+            $df = exec('df /dev/' . $drive);
             
             if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
                 $disks[$drive]['used'] = $matches[2] * 1024;

@@ -17,7 +17,11 @@ class Swap {
         $this->total = $memory['SwapTotal'];
         $this->free = $memory['SwapFree'];
         $this->used = $this->total - $this->free;
-        $this->percentage = $this->used / $this->total;
+
+        if ($this->total)
+            $this->percentage = $this->used / $this->total;
+        else
+            $this->percentage = 0;
         
         unset($memory);
     }
