@@ -18,6 +18,6 @@ class Uptime {
         $this->hours = floor($hours);
         $this->minutes = floor($minutes);
         $this->seconds = floor($seconds);
-	}
+    }
 
 }

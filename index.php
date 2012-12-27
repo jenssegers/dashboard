@@ -21,10 +21,10 @@ if(function_exists('apc_store') && !apc_exists('dashboard')) {
 <!doctype html>
 <html>
 <head>
-	<title>sandy.jenssegers.be</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" href="/dashboard/static/dark.css">
+    <title>sandy.jenssegers.be</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/dashboard/static/dark.css">
 </head>
 <body>
 
@@ -41,9 +41,9 @@ $directory = dirname(__FILE__) . '/widgets';
 $widgets = scandir($directory,  SCANDIR_SORT_ASCENDING);
 
 foreach ($widgets as $widget) {
-	if ($widget != '.' && $widget != '..') {
-		include($directory . '/' . $widget);
-	}
+    if ($widget != '.' && $widget != '..') {
+        include($directory . '/' . $widget);
+    }
 }
 
 ?>

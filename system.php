@@ -2,23 +2,23 @@
 
 class System {
 
-	private $plugins = array();
-	
-	/* --------------------------------------------------------------
-	 * Lazy load requested components
-	 * -------------------------------------------------------------- */
-	function __get($key) {
-		if (array_key_exists($key, $this->plugins))
-			return $this->plugins[$key];
+    private $plugins = array();
+    
+    /* --------------------------------------------------------------
+     * Lazy load requested components
+     * -------------------------------------------------------------- */
+    function __get($key) {
+        if (array_key_exists($key, $this->plugins))
+            return $this->plugins[$key];
 
-		$directory = dirname(__FILE__) . '/components';
-		require($directory . '/' . strtolower($key) . '.php');
+        $directory = dirname(__FILE__) . '/components';
+        require($directory . '/' . strtolower($key) . '.php');
 
-		$name = ucfirst($key);
-		if (class_exists($name)) {
-			return $this->plugins[strtolower($name)] = new $name;
-		}
-	}
+        $name = ucfirst($key);
+        if (class_exists($name)) {
+            return $this->plugins[strtolower($name)] = new $name;
+        }
+    }
 
 }
 

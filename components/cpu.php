@@ -2,17 +2,17 @@
 
 class Cpu {
 
-	function __construct() {
+    function __construct() {
 
-		$parts = explode(" ", read('/proc/loadavg'));
+        $parts = explode(" ", read('/proc/loadavg'));
 
-		if ($parts) {
-	        $this->load = $parts[0];
-	        $this->load5 = $parts[1];
-	        $this->load15 = $parts[2];
-    	}
+        if ($parts) {
+            $this->load = $parts[0];
+            $this->load5 = $parts[1];
+            $this->load15 = $parts[2];
+        }
 
-    	$lines = explode("\n", read('/proc/cpuinfo'));
+        $lines = explode("\n", read('/proc/cpuinfo'));
         
         $cpus = array();
         $current_cpu = 0;
@@ -32,6 +32,6 @@ class Cpu {
         
         unset($cpus);
 
-	}
+    }
 
 }

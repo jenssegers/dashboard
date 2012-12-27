@@ -1,89 +1,89 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
 body {
-	background: none repeat scroll 0 0 #131416;
-	color: #D5D7D6;
-	font-family: 'Open Sans', Arial, sans-serif;
-	text-shadow: 1px 1px 1px #333333;
+    background: none repeat scroll 0 0 #131416;
+    color: #D5D7D6;
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-shadow: 1px 1px 1px #333333;
 }
 
 a {
-	text-decoration: none;
-	color:#fff;
+    text-decoration: none;
+    color:#fff;
 }
 
 #container {
-	margin: auto;
-	width: 1100px;
+    margin: auto;
+    width: 1100px;
 }
 
 h1 {
-	color: #F1F1F1;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 67px;
-	font-weight: normal;
-	line-height: 1.1em;
-	letter-spacing: -2.5px;
-	padding: 0;
-	text-align: center;
-	margin: 60px auto;
+    color: #F1F1F1;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 67px;
+    font-weight: normal;
+    line-height: 1.1em;
+    letter-spacing: -2.5px;
+    padding: 0;
+    text-align: center;
+    margin: 60px auto;
 }
 
 @media all and (max-width: 1100px) {
-	#container {
-		width: 820px;
-	}
+    #container {
+        width: 820px;
+    }
 }
 
 @media all and (max-width: 820px) {
-	#container {
-		width: 550px;
-	}
-	
-	h1 {
-		font-size: 55px;	
-	}
+    #container {
+        width: 550px;
+    }
+    
+    h1 {
+        font-size: 55px;    
+    }
 }
 
 @media all and (max-width: 550px) {
-	#container {
-		width: 275px;
-	}
-	
-	h1 {
-		font-size: 32px;	
-	}
+    #container {
+        width: 275px;
+    }
+    
+    h1 {
+        font-size: 32px;    
+    }
 }
 
 .component {
-	width: 260px;
-	height: 175px;
-	display: inline;
-	float: left;
-	margin: 5px 5px;
-	border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 260px;
+    height: 175px;
+    display: inline;
+    float: left;
+    margin: 5px 5px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 1px 5px 5px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
 
     text-align: center;
 
     background-image: linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
-	background-image: -o-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
-	background-image: -moz-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
-	background-image: -webkit-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
-	background-image: -ms-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left top,
-		right bottom,
-		color-stop(0, rgb(32,36,39)),
-		color-stop(1, rgb(19,19,21))
-	);
+    background-image: -o-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
+    background-image: -moz-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
+    background-image: -webkit-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
+    background-image: -ms-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
+    
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        color-stop(0, rgb(32,36,39)),
+        color-stop(1, rgb(19,19,21))
+    );
 }
 
 .header {
-	font-size: 14px;
+    font-size: 14px;
     font-weight: bold;
     margin: 5px 10px;
     text-transform: uppercase;
@@ -96,11 +96,11 @@ h1 {
 }
 
 .state {
-	padding: 15px 0;
-	font-size: 50px;
-	/*padding-left: 36px;*/
-	/*margin-left: 15px;*/
-	background-position: left 50%;
+    padding: 15px 0;
+    font-size: 50px;
+    /*padding-left: 36px;*/
+    /*margin-left: 15px;*/
+    background-position: left 50%;
     background-repeat: no-repeat;
     text-align: center;
     font-weight: bold;
@@ -111,71 +111,71 @@ h1 {
 }
 
 .state small {
-	display: block;
-	line-height: 18px;
-	font-size: 18px;
+    display: block;
+    line-height: 18px;
+    font-size: 18px;
 }
 
 .green {
-	color: #51CE85 !important;
+    color: #51CE85 !important;
 }
 
 .red {
-	color: #D34F4D !important;
+    color: #D34F4D !important;
 }
 
 .yellow {
-	color: #EAC85D !important;
+    color: #EAC85D !important;
 }
 
 .gray {
-	color: #4D4E50 !important;
+    color: #4D4E50 !important;
 }
 
 .state.up {
-	padding-left: 40px;
-	background-image: url("up.png");
+    padding-left: 40px;
+    background-image: url("up.png");
 }
 
 .state.down {
-	padding-left: 40px;
-	background-image: url("down.png");
+    padding-left: 40px;
+    background-image: url("down.png");
 }
 
 .state.middle {
-	padding-left: 40px;
-	background-image: url("middle.png");
+    padding-left: 40px;
+    background-image: url("middle.png");
 }
 
 .information {
-	color: #F1F1F1;
-	font-size: 18px;
-	text-shadow: 1px 1px 1px #000000;
-	text-align: center;
+    color: #F1F1F1;
+    font-size: 18px;
+    text-shadow: 1px 1px 1px #000000;
+    text-align: center;
 }
 
 .information ul, .information li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .information li {
-	border-right: 1px dotted #4D4E50;
-	display: inline-block;
-	margin-right: 4px;
-	padding-right: 8px;
-	text-align: center;
+    border-right: 1px dotted #4D4E50;
+    display: inline-block;
+    margin-right: 4px;
+    padding-right: 8px;
+    text-align: center;
 }
 
 .information li:last-child {
-	border: 0;
-	margin-right: 0;
-	padding-right: 0;
+    border: 0;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 .information small {
-	font-size: 11px;
-	color: #4D4E50;
-	display: block;
+    font-size: 11px;
+    color: #4D4E50;
+    display: block;
 }

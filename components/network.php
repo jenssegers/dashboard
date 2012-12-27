@@ -2,12 +2,12 @@
 
 class Network {
 
-	function __construct() {
+    function __construct() {
 
         exec("wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'", $ip);
         $this->ip = $ip[0];
 
-		$nets = (array) @glob('/sys/class/net/*', GLOB_NOSORT);
+        $nets = (array) @glob('/sys/class/net/*', GLOB_NOSORT);
         foreach ($nets as $net) {
             $adapter = basename($net);
             $state = read($net . '/operstate');
@@ -23,6 +23,6 @@ class Network {
         }
 
         unset($nets);
-	}
+    }
 
 }

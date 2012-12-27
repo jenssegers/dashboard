@@ -2,9 +2,9 @@
 
 class Swap {
 
-	function __construct() {
+    function __construct() {
 
-		@preg_match_all('/^([^:]+)\:\s+(\d+)\s*(?:k[bB])?\s*/m', read('/proc/meminfo'), $matches, PREG_SET_ORDER);
+        @preg_match_all('/^([^:]+)\:\s+(\d+)\s*(?:k[bB])?\s*/m', read('/proc/meminfo'), $matches, PREG_SET_ORDER);
         
         $memory = array();
         foreach ($matches as $item) {
@@ -17,6 +17,6 @@ class Swap {
         $this->percentage = $this->used / $this->total;
         
         unset($memory);
-	}
+    }
 
 }

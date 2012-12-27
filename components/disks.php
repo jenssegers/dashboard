@@ -2,9 +2,9 @@
 
 class Disks {
 
-	function __construct() {
+    function __construct() {
 
-		$paths = (array) @glob('/sys/block/sd*/device/model', GLOB_NOSORT);
+        $paths = (array) @glob('/sys/block/sd*/device/model', GLOB_NOSORT);
         foreach ($paths as $path) {
             $dirname = dirname(dirname($path));
             $parts = explode('/', $path);
@@ -53,6 +53,6 @@ class Disks {
                 $this->{$disk} = $info;
             }
         }
-	}
+    }
 
 }
