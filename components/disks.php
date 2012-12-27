@@ -63,7 +63,7 @@ class Disks {
                 list(, $reads, $writes) = $matches;
             }
             
-            $disks[$drive]['name'] = 'XEN ' . $path;
+            $disks[$drive]['name'] = 'XEN ' . $drive;
             $disks[$drive]['size'] = read($path . '/size', 0) * 512;
             $disks[$drive]['reads'] = $reads;
             $disks[$drive]['writes'] = $writes;
