@@ -4,6 +4,9 @@ class Swap {
 
     function __construct() {
 
+        /* --------------------------------------------------------------
+         * Swap information
+         * -------------------------------------------------------------- */
         @preg_match_all('/^([^:]+)\:\s+(\d+)\s*(?:k[bB])?\s*/m', read('/proc/meminfo'), $matches, PREG_SET_ORDER);
         
         $memory = array();

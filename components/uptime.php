@@ -4,6 +4,9 @@ class Uptime {
 
     function __construct() {
 
+        /* --------------------------------------------------------------
+         * System uptime
+         * -------------------------------------------------------------- */
         $output = read('/proc/uptime');
         list($seconds) = explode(' ', $output);
         

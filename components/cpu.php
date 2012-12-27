@@ -4,6 +4,9 @@ class Cpu {
 
     function __construct() {
 
+        /* --------------------------------------------------------------
+         * CPU load
+         * -------------------------------------------------------------- */
         $parts = explode(" ", read('/proc/loadavg'));
 
         if ($parts) {
@@ -12,6 +15,10 @@ class Cpu {
             $this->load15 = $parts[2];
         }
 
+
+        /* --------------------------------------------------------------
+         * CPU information
+         * -------------------------------------------------------------- */
         $lines = explode("\n", read('/proc/cpuinfo'));
         
         $cpus = array();
@@ -29,6 +36,7 @@ class Cpu {
 
         $this->name = $cpus[0]['model name'];
         $this->frequency = $cpus[0]['cpu MHz'];
+        $this->count = count($cpus);
         
         unset($cpus);
 

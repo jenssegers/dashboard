@@ -4,7 +4,10 @@ class Disks {
 
     function __construct() {
 
-        $paths = (array) @glob('/sys/block/sd*/device/model', GLOB_NOSORT);
+        /* --------------------------------------------------------------
+         * Disk information
+         * -------------------------------------------------------------- */
+        $paths = (array) @glob('/sys/block/*/device/model', GLOB_NOSORT);
         foreach ($paths as $path) {
             $dirname = dirname(dirname($path));
             $parts = explode('/', $path);
@@ -32,6 +35,7 @@ class Disks {
                 $disks[$drive]['percentage'] = 0;
             }
             
+
             /* --------------------------------------------------------------
              * hddtemp
              * -------------------------------------------------------------- */
