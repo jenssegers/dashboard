@@ -1,7 +1,7 @@
 Notes
 -----
 
-This dashboard was written for Ubuntu, there is no support for other operating systems yet. Also, not all system information is included. If you would like to add these additional features, feel free to fork and create a pull request.
+This dashboard was written for PHP 5.4 and Ubuntu, there is no support for other operating systems yet. Also, not all system information is included. If you would like to add these additional features, feel free to fork and create a pull request.
 
 Installation
 ------------

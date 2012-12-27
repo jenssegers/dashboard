@@ -56,7 +56,7 @@ h1 {
 
 .component {
     width: 260px;
-    height: 175px;
+    height: 170px;
     display: inline;
     float: left;
     margin: 5px 5px;
@@ -79,7 +79,7 @@ h1 {
 }
 
 .state {
-    padding: 15px 0;
+    padding: 15px 0 10px 0;
     font-size: 50px;
     /*padding-left: 36px;*/
     /*margin-left: 15px;*/

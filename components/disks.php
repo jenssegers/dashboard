@@ -18,7 +18,6 @@ class Disks {
             }
             
             $disks[$drive]['name'] = read($path);
-            $disks[$drive]['state'] = read(dirname($path) . '/state');
             $disks[$drive]['size'] = read(dirname(dirname($path)) . '/size', 0) * 512;
             $disks[$drive]['reads'] = $reads;
             $disks[$drive]['writes'] = $writes;
@@ -42,9 +41,6 @@ class Disks {
                 $hddtemp = $hddtemp[0];
                 @preg_match('#:\s+([\d]+)#', $hddtemp, $matches);
                 $disks[$drive]['temp'] = $matches[1];
-            } else {
-                $disks[$drive]['state'] = 'unknown';
-                $disks[$drive]['temp'] = FALSE;
             }
             
             ksort($disks);

@@ -5,10 +5,8 @@
     </div>
         <?php
             $class = 'green';
-            if($disk['temp'] > 35) $class = 'yellow';
-            if($disk['temp'] > 40) $class = 'red';
-            if($class != 'red' && $disk['percentage'] > 75) $class = 'yellow';
             if($disk['percentage'] > 85) $class = 'red';
+            else if($disk['percentage'] > 75) $class = 'yellow';
         ?>
         <div class="state <?php echo $class; ?>">
         <?php echo round($disk['used'] / 1000000000, 1); ?> GB
@@ -47,6 +45,12 @@
                 }
                 ?>
             </li>
+            <?php if (isset($disk['temp'])): ?>
+            <li>
+                <small>Temp</small>
+                <?php echo $disk['temp']; ?>
+            </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>
