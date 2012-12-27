@@ -62,7 +62,7 @@ class Disks {
         foreach ($paths as $path) {
             $drive = basename($path);
             
-            if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read(dirname(dirname($path)) . '/stat'), $matches) !== 1) {
+            if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read($path . '/stat'), $matches) !== 1) {
                 $reads = 0;
                 $writes = 0;
             } else {
