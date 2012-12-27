@@ -4,22 +4,35 @@ class Network {
 
     function __construct() {
 
+        /* --------------------------------------------------------------
+         * Get remote ip
+         * -------------------------------------------------------------- */
         exec("wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'", $ip);
         $this->ip = $ip[0];
 
-        $nets = (array) @glob('/sys/class/net/*', GLOB_NOSORT);
-        foreach ($nets as $net) {
-            $adapter = basename($net);
-            $state = read($net . '/operstate');
 
-            if ($state == 'unknown' || $state == '')
+        /* --------------------------------------------------------------
+         * /proc/net/dev
+         * -------------------------------------------------------------- */
+        $lines = explode("\n", read('/proc/net/dev'));
+
+        foreach ($lines as $line) {
+            if (!strpos($line, ':'))
                 continue;
             
-            $this->{$adapter}['received'] = read($net . '/statistics/rx_bytes');
-            $this->{$adapter}['sent'] = read($net . '/statistics/tx_bytes');
-            $this->{$adapter}['total'] = $this->{$adapter}['sent'] + $this->{$adapter}['received'];
+            $parts = preg_split('/\s+/', trim($line));
+            $adapter = substr($parts[0], 0, -1);
+
+            $state = read('/sys/class/net/' . $adapter . '/operstate');
+            if ($state == 'unknown' || $state == '')
+                continue;
+
             $this->{$adapter}['state'] = $state;
-            $this->{$adapter}['errors'] = (int)read($net . '/statistics/rx_errors') + (int)read($net . '/statistics/tx_errors');
+            $this->{$adapter}['received'] = $parts[1];
+            $this->{$adapter}['sent'] = $parts[9];
+            $this->{$adapter}['total'] = $this->{$adapter}['sent'] + $this->{$adapter}['received'];
+            $this->{$adapter}['dropped'] = $parts[4] + $parts[12];
+            $this->{$adapter}['errors'] = $parts[3] + $parts[11];
         }
 
         unset($nets);
