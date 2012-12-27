@@ -46,12 +46,6 @@ class Disks {
                 @preg_match('#:\s+([\d]+)#', $hddtemp, $matches);
                 $disks[$drive]['temp'] = $matches[1];
             }
-            
-            ksort($disks);
-
-            foreach ($disks as $disk => $info) {
-                $this->{$disk} = $info;
-            }
         }
 
 
@@ -84,6 +78,18 @@ class Disks {
                 $disks[$drive]['percentage'] = 0;
             }
         }
+
+
+        /* --------------------------------------------------------------
+         * Sort disks
+         * -------------------------------------------------------------- */
+        ksort($disks);
+
+        foreach ($disks as $disk => $info) {
+            $this->{$disk} = $info;
+        }
+
+        unset($disks);
     }
 
 }
