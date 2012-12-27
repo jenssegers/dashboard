@@ -4,7 +4,8 @@
     </div>
     <?php
         $class = 'green';
-        if($system->cpu->frequency >= 1700) $class = 'yellow';
+        if($system->cpu->load >= 80) $class = 'red';
+        else if($system->cpu->load >= 10) $class = 'yellow';
     ?>
     
     <div class="state <?php echo $class; ?>">

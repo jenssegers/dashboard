@@ -16,6 +16,11 @@ if(function_exists('apc_store') && !apc_exists('dashboard')) {
     $system = apc_fetch('dashboard');
 }
 
+
+/* --------------------------------------------------------------
+ * Get current directory
+ * -------------------------------------------------------------- */
+$base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/');
 ?>
 
 <!doctype html>
@@ -24,7 +29,7 @@ if(function_exists('apc_store') && !apc_exists('dashboard')) {
     <title>sandy.jenssegers.be</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="/dashboard/static/dark.css">
+    <link rel="stylesheet" href="<? echo $base . '/static/dark.css'; ?>">
 </head>
 <body>
 
