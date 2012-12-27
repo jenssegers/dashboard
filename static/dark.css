@@ -66,6 +66,7 @@ h1 {
 
 .header {
 	font-size: 14px;
+	line-height: 16px;
     font-weight: bold;
     margin: 5px 10px;
     text-transform: uppercase;

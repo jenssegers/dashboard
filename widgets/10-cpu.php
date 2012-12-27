@@ -1,6 +1,6 @@
 <div class="component">
 	<div class="header">
-		<?php echo str_replace('Intel(R) Core(TM)', '', $system->cpu->name); ?>
+		<?php echo str_replace(array('(R)', '(TM)', ' CPU'), '', $system->cpu->name); ?>
 	</div>
 	<?php
 	    $class = 'green';
