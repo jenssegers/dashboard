@@ -70,7 +70,7 @@ class Disks {
             }
             
             $disks[$drive]['name'] = 'XEN ' . $path;
-            $disks[$drive]['size'] = read($path) . '/size', 0) * 512;
+            $disks[$drive]['size'] = read($path . '/size', 0) * 512;
             $disks[$drive]['reads'] = $reads;
             $disks[$drive]['writes'] = $writes;
             
