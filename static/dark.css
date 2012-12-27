@@ -66,9 +66,9 @@ h1 {
 
 .header {
     font-size: 14px;
-    line-height: 16px;
+    line-height: 14px;
     font-weight: bold;
-    margin: 5px 10px;
+    margin: 10px 5px 10px 10px;
     text-transform: uppercase;
     background-image: url("icon.png");
     background-position: left 50%;
