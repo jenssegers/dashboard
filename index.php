@@ -37,7 +37,7 @@ $base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/'
 
 <h1>
     <?php echo $system->os->name; ?>
-    <small id="uptime"><? echo $system->uptime->days; ?> days, <? echo $system->uptime->hours; ?> hours, <? echo $system->uptime->minutes; ?> minutes </small>
+    <small id="uptime">online for <? echo $system->uptime->days; ?> days, <? echo $system->uptime->hours; ?> hours, <? echo $system->uptime->minutes; ?> minutes </small>
 </h1>
 
 <?php

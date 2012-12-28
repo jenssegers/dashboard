@@ -29,6 +29,7 @@ h1 {
 }
 
 #uptime {
+    color: #999;
     display: block;
     font-size: 18px;
     line-height: 18px;
