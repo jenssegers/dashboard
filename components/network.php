@@ -5,17 +5,6 @@ class Network {
     function __construct() {
 
         /* --------------------------------------------------------------
-         * Get remote ip
-         * -------------------------------------------------------------- */
-        $this->ip = gethostbyname($_SERVER['SERVER_NAME']);
-
-        if (!$this->ip) {
-            exec("wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'", $ip);
-            $this->ip = $ip[0];
-        }
-
-
-        /* --------------------------------------------------------------
          * Network adapters
          * -------------------------------------------------------------- */
         $lines = explode("\n", read('/proc/net/dev'));
@@ -31,12 +20,32 @@ class Network {
             if ($state == 'unknown' || $state == '')
                 continue;
 
-            $this->{$adapter}['state'] = $state;
-            $this->{$adapter}['received'] = $parts[1];
-            $this->{$adapter}['sent'] = $parts[9];
-            $this->{$adapter}['total'] = $this->{$adapter}['sent'] + $this->{$adapter}['received'];
-            $this->{$adapter}['dropped'] = $parts[4] + $parts[12];
-            $this->{$adapter}['errors'] = $parts[3] + $parts[11];
+            $this->{$adapter} = new stdClass;
+            $this->{$adapter}->state = $state;
+            $this->{$adapter}->received = $parts[1];
+            $this->{$adapter}->sent = $parts[9];
+            $this->{$adapter}->total = $this->{$adapter}->sent + $this->{$adapter}->received;
+            $this->{$adapter}->dropped = $parts[4] + $parts[12];
+            $this->{$adapter}->errors = $parts[3] + $parts[11];
+
+            /* --------------------------------------------------------------
+             * ifconfig
+             * -------------------------------------------------------------- */
+
+            $ifconfig = array();
+            exec('/sbin/ifconfig ' . $adapter, $ifconfig);
+
+            if ($ifconfig) {
+                foreach ($ifconfig as $line) {
+                    if (preg_match('/inet\saddr:\s*(\S*)/i', $line, $matches)) {
+                        $this->{$adapter}->ip = $matches[1];
+                    } else if (preg_match('/inet6\saddr:\s*(\S*)/i', $line, $matches)) {
+                        $this->{$adapter}->ipv6 = $matches[1];
+                    } else if (preg_match('/HWaddr\s*(\S*)/i', $line, $matches)) {
+                        $this->{$adapter}->mac = $matches[1];
+                    }
+                }
+            }
         }
 
         unset($nets);

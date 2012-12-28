@@ -5,34 +5,74 @@ class Disks {
     function __construct() {
 
         /* --------------------------------------------------------------
+         * Get all disks
+         * -------------------------------------------------------------- */
+        $regular = (array) @glob('/sys/block/*/device/model', GLOB_NOSORT);
+        $virtual = (array) @glob('/sys/block/xvd*', GLOB_NOSORT);
+
+        $paths = array();
+        foreach ($regular as $path) {
+            $paths[] = dirname(dirname($path));
+        }
+        foreach ($virtual as $path) {
+            $paths[] = $path;
+        }
+
+
+        /* --------------------------------------------------------------
+         * Get partitions
+         * -------------------------------------------------------------- */
+        $partitions = explode("\n", read('/proc/partitions'));
+        $partitions = array_slice($partitions, 2);
+        foreach ($partitions as &$partition) {
+            $partition = preg_split('/\s+/', $partition);
+        }
+
+        /* --------------------------------------------------------------
          * Disk information
          * -------------------------------------------------------------- */
-        $paths = (array) @glob('/sys/block/*/device/model', GLOB_NOSORT);
         foreach ($paths as $path) {
-            $dirname = dirname(dirname($path));
             $parts = explode('/', $path);
-            $drive = $parts[3];
+            $drive = end($parts);
             
-            if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read(dirname(dirname($path)) . '/stat'), $matches) !== 1) {
+            if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read($path . '/stat'), $matches) !== 1) {
                 $reads = 0;
                 $writes = 0;
             } else {
                 list(, $reads, $writes) = $matches;
             }
             
-            $disks[$drive]['name'] = read($path);
-            $disks[$drive]['size'] = read(dirname(dirname($path)) . '/size', 0) * 512;
-            $disks[$drive]['reads'] = $reads;
-            $disks[$drive]['writes'] = $writes;
+            $this->{$drive} = new stdClass;
+            $this->{$drive}->name = read($path . '/device/model');
+            $this->{$drive}->size = read($path . '/size', 0) * 512;
+            $this->{$drive}->reads = $reads;
+            $this->{$drive}->writes = $writes;
+
+            if (!$this->{$drive}->name)
+                $this->{$drive}->name = 'Virtual ' . $drive;
             
-            $df = exec('df /dev/' . $drive . '1');
-            
-            if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
-                $disks[$drive]['used'] = $matches[2] * 1024;
-                $disks[$drive]['percentage'] = $disks[$drive]['used'] / $disks[$drive]['size'] * 100;
-            } else {
-                $disks[$drive]['used'] = 'NA';
-                $disks[$drive]['percentage'] = 0;
+
+            /* --------------------------------------------------------------
+             * Disk usage
+             * -------------------------------------------------------------- */
+            foreach ($partitions as $partition) {
+                if ($drive != $partition[4] && $dev = strstr($partition[4], $drive)) {
+                    $df = exec('df /dev/' . $dev);
+
+                    if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
+                        $this->{$drive}->used += $matches[2] * 1024;
+                        $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
+                    }
+                }
+            }
+
+            if (!isset($this->{$drive}->used)) {
+                $df = exec('df /dev/' . $drive . '1');
+
+                if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
+                    $this->{$drive}->used += $matches[2] * 1024;
+                    $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
+                }
             }
             
 
@@ -44,49 +84,8 @@ class Disks {
             if ($hddtemp) {
                 $hddtemp = $hddtemp[0];
                 @preg_match('#:\s+([\d]+)#', $hddtemp, $matches);
-                $disks[$drive]['temp'] = $matches[1];
+                $disks[$drive]->temp = $matches[1];
             }
-        }
-
-
-        /* --------------------------------------------------------------
-         * VPS disks
-         * -------------------------------------------------------------- */
-        $paths = (array) @glob('/sys/block/xvd*', GLOB_NOSORT);
-        foreach ($paths as $path) {
-            $drive = basename($path);
-            
-            if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read($path . '/stat'), $matches) !== 1) {
-                $reads = 0;
-                $writes = 0;
-            } else {
-                list(, $reads, $writes) = $matches;
-            }
-            
-            $disks[$drive]['name'] = 'XEN ' . $drive;
-            $disks[$drive]['size'] = read($path . '/size', 0) * 512;
-            $disks[$drive]['reads'] = $reads;
-            $disks[$drive]['writes'] = $writes;
-            
-            $df = exec('df /dev/' . $drive);
-            
-            if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
-                $disks[$drive]['used'] = $matches[2] * 1024;
-                $disks[$drive]['percentage'] = $disks[$drive]['used'] / $disks[$drive]['size'] * 100;
-            } else {
-                $disks[$drive]['used'] = 'NA';
-                $disks[$drive]['percentage'] = 0;
-            }
-        }
-
-
-        /* --------------------------------------------------------------
-         * Sort disks
-         * -------------------------------------------------------------- */
-        ksort($disks);
-
-        foreach ($disks as $disk => $info) {
-            $this->{$disk} = $info;
         }
 
         unset($disks);
