@@ -32,8 +32,7 @@ class Network {
              * ifconfig
              * -------------------------------------------------------------- */
 
-            $ifconfig = array();
-            exec('/sbin/ifconfig ' . $adapter, $ifconfig);
+            $ifconfig = array(); exec('/sbin/ifconfig ' . $adapter, $ifconfig);
 
             if ($ifconfig) {
                 foreach ($ifconfig as $line) {

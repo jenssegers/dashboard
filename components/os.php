@@ -13,11 +13,10 @@ class OS {
         $this->php = phpversion();
 
         /* --------------------------------------------------------------
-         * Get remote ip
+         * Get real remote ip
          * -------------------------------------------------------------- */
-        exec("wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'", $ip);
-        if ($ip)
-        	$this->ip = $ip[0];
+        $this->ip = file_get_contents('http://icanhazip.com');
+
     }
 
 }
