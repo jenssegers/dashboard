@@ -56,8 +56,8 @@ class Disks {
              * Disk usage
              * -------------------------------------------------------------- */
             foreach ($partitions as $partition) {
-                if ($drive != $partition[4] && $dev = strstr($partition[4], $drive)) {
-                    $df = exec('df /dev/' . $dev);
+                if (strpos($partition[4], $drive) && is_numeric(str_replace($drive, '', $partition[4]))) {
+                    $df = exec('df /dev/' . $partition[4]);
 
                     if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
                         $this->{$drive}->used += $matches[2] * 1024;
