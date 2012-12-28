@@ -22,10 +22,9 @@ class Disks {
         /* --------------------------------------------------------------
          * Get partitions
          * -------------------------------------------------------------- */
-        $partitions = explode("\n", read('/proc/partitions'));
-        $partitions = array_slice($partitions, 2);
-        foreach ($partitions as &$partition) {
-            $partition = preg_split('/\s+/', $partition);
+        $partitions = array_slice(explode("\n", read('/proc/partitions')), 2);
+        foreach ($partitions as $k=>$partition) {
+            $partitions[$k] = preg_split('/\s+/', $partition);
         }
 
         /* --------------------------------------------------------------
@@ -56,22 +55,15 @@ class Disks {
              * Disk usage
              * -------------------------------------------------------------- */
             foreach ($partitions as $partition) {
-                if (strpos($partition[4], $drive) && is_numeric(str_replace($drive, '', $partition[4]))) {
-                    $df = exec('df /dev/' . $partition[4]);
+                $part = $partition[4];
+
+                if ($part == $drive || is_numeric(str_replace($drive, '', $part))) {
+                    $df = exec('df /dev/' . $part);
 
                     if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
                         $this->{$drive}->used += $matches[2] * 1024;
                         $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
                     }
-                }
-            }
-
-            if (!isset($this->{$drive}->used)) {
-                $df = exec('df /dev/' . $drive . '1');
-
-                if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
-                    $this->{$drive}->used += $matches[2] * 1024;
-                    $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
                 }
             }
             
