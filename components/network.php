@@ -7,8 +7,12 @@ class Network {
         /* --------------------------------------------------------------
          * Get remote ip
          * -------------------------------------------------------------- */
-        exec("wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'", $ip);
-        $this->ip = $ip[0];
+        $this->ip = gethostbyname($_SERVER['SERVER_NAME']);
+
+        if (!$this->ip) {
+            exec("wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'", $ip);
+            $this->ip = $ip[0];
+        }
 
 
         /* --------------------------------------------------------------
