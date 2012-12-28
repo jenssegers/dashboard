@@ -26,7 +26,7 @@ $base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/'
 <!doctype html>
 <html>
 <head>
-    <title><?php echo $system->os->name; ?></title>
+    <title><?php echo $system->os->hostname; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="<? echo $base . '/static/dark.css'; ?>">
@@ -36,7 +36,7 @@ $base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/'
 <div id="container">
 
 <h1>
-    <?php echo $system->os->name; ?>
+    <?php echo $system->os->hostname; ?>
     <small id="uptime">online for <? echo $system->uptime->days; ?> days, <? echo $system->uptime->hours; ?> hours, <? echo $system->uptime->minutes; ?> minutes </small>
 </h1>
 
