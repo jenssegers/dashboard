@@ -46,6 +46,8 @@ class Disks {
             $this->{$drive}->size = read($path . '/size', 0) * 512;
             $this->{$drive}->reads = $reads;
             $this->{$drive}->writes = $writes;
+            $this->{$drive}->used = 0;
+            $this->{$drive}->percentage = 0;
 
             if (!$this->{$drive}->name)
                 $this->{$drive}->name = 'Virtual ' . $drive;
@@ -58,9 +60,9 @@ class Disks {
                 $part = $partition[4];
 
                 if ($part == $drive || is_numeric(str_replace($drive, '', $part))) {
-                    $df = exec('df /dev/' . $part);
+                    $df = array(); exec('df /dev/' . $part, $df);
 
-                    if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df, $matches)) {
+                    if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df[1], $matches)) {
                         $this->{$drive}->used += $matches[2] * 1024;
                         $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
                     }
@@ -71,7 +73,7 @@ class Disks {
             /* --------------------------------------------------------------
              * hddtemp
              * -------------------------------------------------------------- */
-            exec('hddtemp /dev/'.$drive . ' 2> /dev/null', $hddtemp);
+            $hddtemp = array(); exec('hddtemp /dev/'.$drive . ' 2> /dev/null', $hddtemp);
             
             if ($hddtemp) {
                 $hddtemp = $hddtemp[0];
