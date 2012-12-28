@@ -21,7 +21,7 @@ class Memory {
         /* --------------------------------------------------------------
          * dmidecode
          * -------------------------------------------------------------- */
-        exec('/usr/sbin/dmidecode --type 17', $dmi);
+        exec('/usr/sbin/dmidecode --type 17 2> /dev/null', $dmi);
         
         if ($dmi) {
             $memory = array();
