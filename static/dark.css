@@ -22,36 +22,18 @@ h1 {
     font-size: 67px;
     font-weight: normal;
     line-height: 1.1em;
-    letter-spacing: -2.5px;
+    letter-spacing: -2px;
     padding: 0;
     text-align: center;
-    margin: 60px auto;
+    margin: 60px auto 40px auto;
 }
 
-@media all and (max-width: 1100px) {
-    #container {
-        width: 820px;
-    }
-}
-
-@media all and (max-width: 820px) {
-    #container {
-        width: 550px;
-    }
-    
-    h1 {
-        font-size: 55px;    
-    }
-}
-
-@media all and (max-width: 550px) {
-    #container {
-        width: 275px;
-    }
-    
-    h1 {
-        font-size: 32px;    
-    }
+#uptime {
+    display: block;
+    font-size: 18px;
+    line-height: 18px;
+    padding-top: 10px;
+    letter-spacing: 0;
 }
 
 .component {
@@ -160,4 +142,30 @@ h1 {
     font-size: 11px;
     color: #4D4E50;
     display: block;
+}
+
+@media all and (max-width: 1100px) {
+    #container {
+        width: 820px;
+    }
+}
+
+@media all and (max-width: 820px) {
+    #container {
+        width: 550px;
+    }
+    
+    h1 {
+        font-size: 55px;    
+    }
+}
+
+@media all and (max-width: 550px) {
+    #container {
+        width: 275px;
+    }
+    
+    h1 {
+        font-size: 32px;    
+    }
 }
