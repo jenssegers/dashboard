@@ -1,6 +1,11 @@
 <div class="component">
     <div class="header">
-        <?php echo $system->memory->brand; ?> <?php echo $system->memory->type; ?> <?php echo $system->memory->speed; ?>
+        <?php
+        if (isset($system->memory->brand))
+            echo $system->memory->brand . ' ' . $system->memory->type . ' ' . $system->memory->speed;
+        else
+            echo "Memory";
+        ?>
     </div>
         <?php if ($system->memory->percentage < 70): ?>
             <div class="state green">

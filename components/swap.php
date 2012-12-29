@@ -9,21 +9,22 @@ class Swap {
          * -------------------------------------------------------------- */
         @preg_match_all('/^([^:]+)\:\s+(\d+)\s*(?:k[bB])?\s*/m', read('/proc/meminfo'), $matches, PREG_SET_ORDER);
         
-        $memory = array();
-        foreach ($matches as $item) {
-            $memory[$item[1]] = $item[2];
-        }
-        
-        $this->total = $memory['SwapTotal'];
-        $this->free = $memory['SwapFree'];
-        $this->used = $this->total - $this->free;
+        if ($matches) {
+            foreach ($matches as $item) {
 
-        if ($this->total)
-            $this->percentage = $this->used / $this->total;
-        else
-            $this->percentage = 0;
-        
-        unset($memory);
+                switch (strtolower($item[1])) {
+                    case 'swaptotal':
+                        $this->total = $item[2];
+                        break;
+                    case 'swapfree':
+                        $this->free = $item[2];
+                        break;
+                }
+            }
+
+            $this->used = $this->total - $this->free;
+            $this->percentage = $this->used / $this->total * 100;
+        }
     }
 
 }

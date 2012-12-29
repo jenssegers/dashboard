@@ -10,7 +10,6 @@ class Processes {
         $processes = (array) @glob('/proc/*/status', GLOB_NOSORT);
         $this->count = count($processes);
 
-        unset($processes);
     }
 
 }

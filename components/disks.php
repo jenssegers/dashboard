@@ -78,11 +78,9 @@ class Disks {
             if ($hddtemp) {
                 $hddtemp = $hddtemp[0];
                 @preg_match('#:\s+([\d]+)#', $hddtemp, $matches);
-                $disks[$drive]->temp = $matches[1];
+                $this->{$drive}->temp = $matches[1];
             }
         }
-
-        unset($disks);
     }
 
 }

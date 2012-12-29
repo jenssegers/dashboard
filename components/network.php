@@ -46,8 +46,6 @@ class Network {
                 }
             }
         }
-
-        unset($nets);
     }
 
 }

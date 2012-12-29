@@ -1,6 +1,11 @@
 <div class="component">
     <div class="header">
-        <?php echo str_replace(array('(R)', '(TM)', ' CPU'), '', $system->cpu->name); ?>
+        <?php 
+        if (isset($system->cpu->name))
+            echo str_replace(array('(R)', '(TM)', ' CPU'), '', $system->cpu->name);
+        else
+            echo "Memory";
+        ?>
     </div>
     <?php
         $class = 'green';

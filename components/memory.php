@@ -4,16 +4,24 @@ class Memory {
 
     function __construct() {
 
+        /* --------------------------------------------------------------
+         * Memory information
+         * -------------------------------------------------------------- */
         @preg_match_all('/^([^:]+)\:\s+(\d+)\s*(?:k[bB])?\s*/m', read('/proc/meminfo'), $matches, PREG_SET_ORDER);
         
         if ($matches) {
-            $memory = array();
             foreach ($matches as $item) {
-                $memory[$item[1]] = $item[2];
+
+                switch (strtolower($item[1])) {
+                    case 'memtotal':
+                        $this->total = $item[2];
+                        break;
+                    case 'memfree':
+                        $this->free = $item[2];
+                        break;
+                }
             }
-            
-            $this->total = $memory['MemTotal'];
-            $this->free = $memory['MemFree'];
+
             $this->used = $this->total - $this->free;
             $this->percentage = $this->used / $this->total * 100;
         }
@@ -24,21 +32,25 @@ class Memory {
         exec('/usr/sbin/dmidecode --type 17 2> /dev/null', $dmi);
         
         if ($dmi) {
-            $memory = array();
             foreach ($dmi as $item) {
-                $parts = explode(':', $item);
-                if(count($parts) == 2) {
-                    list($key, $value) = explode(':', $item);
-                    $memory[trim($key)] = trim($value);
+                if (!strpos($item, ':'))
+                    continue;
+
+                list($key, $value) = explode(':', $item, 2);
+
+                switch (strtolower(trim($key))) {
+                    case 'type':
+                        $this->type = $value;
+                        break;
+                    case 'manufacturer':
+                        $this->type = $value;
+                        break;
+                    case 'speed':
+                        $this->peed = $value;
+                        break;
                 }
             }
-            
-            $this->type = isset($memory['Type']) ? $memory['Type'] : '';
-            $this->brand = isset($memory['Manufacturer']) ? $memory['Manufacturer'] : 'Memory';
-            $this->speed = isset($memory['Speed']) ? $memory['Speed'] : '';
         }
-        
-        unset($memory);
     }
 
 }

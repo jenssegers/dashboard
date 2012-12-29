@@ -19,26 +19,32 @@ class Cpu {
         /* --------------------------------------------------------------
          * CPU information
          * -------------------------------------------------------------- */
-        $lines = explode("\n", read('/proc/cpuinfo'));
+        $processors = preg_split('/\s?\n\s?\n/', read('/proc/cpuinfo'));
         
-        $cpus = array();
-        $current_cpu = 0;
-        foreach ($lines as $line) {
-            if ($line == '') {
-                $current_cpu++;
-            }
-            
-            $m = explode(':', $line, 2);
-            if (count($m) == 2) {
-                $cpus[$current_cpu][trim($m[0])] = trim($m[1]);
-            }
-        }
+        if ($processors) {
+            // only using first cpu for information
+            $processor = reset($processors);
+            $lines = explode("\n", $processor);
 
-        $this->name = $cpus[0]['model name'];
-        $this->frequency = $cpus[0]['cpu MHz'];
-        $this->count = count($cpus);
-        
-        unset($cpus);
+            foreach ($lines as $line) {
+                list($key, $value) = explode(':', $line, 2);
+
+                switch (strtolower(trim($key))) {
+                    case 'processor':
+                    case 'model name':
+                        $this->name = $value;
+                        break;
+                    case 'clock':
+                    case 'cpu mhz':
+                        $this->frequency = $value;
+                        break;
+
+                }
+
+            }
+
+            $this->count = count($processors);
+        }
 
     }
 
