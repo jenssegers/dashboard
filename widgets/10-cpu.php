@@ -4,7 +4,7 @@
         if (isset($system->cpu->name))
             echo str_replace(array('(R)', '(TM)', ' CPU'), '', $system->cpu->name);
         else
-            echo "Memory";
+            echo "CPU";
         ?>
     </div>
     <?php
