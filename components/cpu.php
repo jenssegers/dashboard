@@ -35,6 +35,7 @@ class Cpu {
                         $this->name = $value;
                         break;
                     case 'clock':
+                    case 'bogomips':
                     case 'cpu mhz':
                         $this->frequency = $value;
                         break;
