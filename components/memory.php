@@ -14,7 +14,7 @@ class Memory {
             
             $this->total = $memory['MemTotal'];
             $this->free = $memory['MemFree'];
-            $this->used = $memory['Active'];
+            $this->used = $this->total - $this->free;
             $this->percentage = $this->used / $this->total * 100;
         }
 
