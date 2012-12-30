@@ -20,7 +20,7 @@
         <ul>
             <li>
                 <small>Frequency</small>
-                <?php echo number_format($system->cpu->frequency); ?> GHz
+                <?php echo number_format($system->cpu->frequency); ?> MHz
             </li>
             <li>
                 <small>5 minutes</small>
