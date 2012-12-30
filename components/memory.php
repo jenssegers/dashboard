@@ -19,6 +19,9 @@ class Memory {
                     case 'memfree':
                         $this->free = $item[2];
                         break;
+                    case 'memactive':
+                        $this->active = $item[2];
+                        break;
                 }
             }
 
