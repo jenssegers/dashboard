@@ -26,10 +26,17 @@
                 <small>5 minutes</small>
                 <?php echo number_format($system->cpu->load5, 2); ?> %
             </li>
+            <?php if (isset($system->cpu->temp)): ?>
+            <li>
+                <small>Temp</small>
+                <?php echo number_format($system->cpu->temp, 2); ?> %
+            </li>
+            <?php else: ?>
             <li>
                 <small>15 minutes</small>
                 <?php echo number_format($system->cpu->load15, 2); ?> %
             </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>

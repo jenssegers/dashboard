@@ -49,6 +49,16 @@ class Cpu {
             $this->count = count($processors);
         }
 
+
+		/* --------------------------------------------------------------
+         * Raspberry Pi Temperature
+         * -------------------------------------------------------------- */
+		$temp = read('/proc/cpuinfo');
+		
+		if ($temp) {
+			$this->temp = $temp / 1000;
+		}
+
     }
 
 }
