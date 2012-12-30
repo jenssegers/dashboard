@@ -53,7 +53,7 @@ class Cpu {
 		/* --------------------------------------------------------------
          * Raspberry Pi Temperature
          * -------------------------------------------------------------- */
-		$temp = read('/proc/cpuinfo');
+		$temp = read('/sys/class/thermal/thermal_zone0/temp');
 		
 		if ($temp) {
 			$this->temp = $temp / 1000;

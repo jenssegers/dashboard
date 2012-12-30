@@ -29,7 +29,7 @@
             <?php if (isset($system->cpu->temp)): ?>
             <li>
                 <small>Temp</small>
-                <?php echo number_format($system->cpu->temp, 2); ?> %
+                <?php echo number_format($system->cpu->temp, 2); ?> &deg;
             </li>
             <?php else: ?>
             <li>
