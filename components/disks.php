@@ -7,15 +7,13 @@ class Disks {
         /* --------------------------------------------------------------
          * Get all disks
          * -------------------------------------------------------------- */
-        $regular = (array) @glob('/sys/block/*/device/model', GLOB_NOSORT);
-        $virtual = (array) @glob('/sys/block/xvd*', GLOB_NOSORT);
+        $paths = (array) @glob('/sys/block/*/device', GLOB_NOSORT);
 
-        $paths = array();
-        foreach ($regular as $path) {
-            $paths[] = dirname(dirname($path));
-        }
-        foreach ($virtual as $path) {
-            $paths[] = $path;
+        $drives = array();
+        foreach ($paths as $path) {
+            $parts = explode('/', $path);
+            array_pop($parts); // throw away last part
+            $drives[end($parts)] = implode('/', $parts);
         }
 
 
@@ -27,13 +25,11 @@ class Disks {
             $partitions[$k] = preg_split('/\s+/', $partition);
         }
 
+
         /* --------------------------------------------------------------
          * Disk information
          * -------------------------------------------------------------- */
-        foreach ($paths as $path) {
-            $parts = explode('/', $path);
-            $drive = end($parts);
-            
+        foreach ($drives as $drive => $path) {
             if (preg_match('/^(\d+)\s+\d+\s+\d+\s+\d+\s+(\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+$/', read($path . '/stat'), $matches) !== 1) {
                 $reads = 0;
                 $writes = 0;
