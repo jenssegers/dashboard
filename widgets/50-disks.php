@@ -9,7 +9,12 @@
             else if($disk->percentage > 75) $class = 'yellow';
         ?>
         <div class="state <?php echo $class; ?>">
-        <?php echo round($disk->used / 1000000000, 1); ?> GB
+        <?php
+        if ($disk->used < 1000000000)
+            echo round($disk->used / 1000000, 1) . ' MB';
+        else
+            echo round($disk->used / 1000000000, 1) . ' GB';
+        ?>
     </div>
     <div class="information">
         <ul>
