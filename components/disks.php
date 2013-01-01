@@ -45,8 +45,14 @@ class Disks {
             $this->{$drive}->used = 0;
             $this->{$drive}->percentage = 0;
 
-            if (!$this->{$drive}->name)
-                $this->{$drive}->name = 'Virtual ' . $drive;
+            if (!$this->{$drive}->name) {
+                $type = read($path . '/device/type');
+
+                if ($type)
+                    $this->{$drive}->name = $type . ' ' . $drive;
+                else
+                    $this->{$drive}->name = 'Virtual ' . $drive;
+            }
             
 
             /* --------------------------------------------------------------
