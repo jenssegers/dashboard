@@ -55,7 +55,7 @@ class Disks {
             foreach ($partitions as $partition) {
                 $part = $partition[4];
 
-                if ($part == $drive || is_numeric(str_replace($drive, '', $part))) {
+                if (strpos($part, $drive) !== FALSE) {
                     $df = array(); exec('df /dev/' . $part, $df);
 
                     if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df[1], $matches)) {
