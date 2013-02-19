@@ -14,6 +14,11 @@ Allow apache to read memory information:
 
     usermod -a -G kmem www-data
 
+Example
+-------
+
+![Dashboard example](http://jenssegers.be/uploads/2013/02/19/dashboard.png)
+
 Features
 --------
 

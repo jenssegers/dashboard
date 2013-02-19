@@ -9,17 +9,17 @@
         <?php else: ?>
             <div class="state red">
         <?php endif; ?>
-            <?php echo round($system->swap->used / 1000); ?> MB
+            <?php echo round($system->swap->used / 1024); ?> MB
         </div>
     <div class="information">
         <ul>
             <li>
                 <small>Total</small>
-                <?php echo round($system->swap->total / 1000); ?> MB
+                <?php echo round($system->swap->total / 1024); ?> MB
             </li>
             <li>
                 <small>Free</small>
-                <?php echo round($system->swap->free / 1000); ?> MB
+                <?php echo round($system->swap->free / 1024); ?> MB
             </li>
             <li>
                 <small>Percent.</small>

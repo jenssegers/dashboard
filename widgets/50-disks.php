@@ -10,26 +10,26 @@
         ?>
         <div class="state <?php echo $class; ?>">
         <?php
-        if ($disk->used < 1000000000)
-            echo round($disk->used / 1000000, 1) . ' MB';
+        if ($disk->used < 1073741824)
+            echo round($disk->used / 1048576, 1) . ' MB';
         else
-            echo round($disk->used / 1000000000, 1) . ' GB';
+            echo round($disk->used / 1073741824, 1) . ' GB';
         ?>
     </div>
     <div class="information">
         <ul>
             <li>
                 <small>Size</small>
-                <?php echo floor($disk->size / 1000000000); ?>GB
+                <?php echo floor($disk->size / 1073741824); ?>GB
             </li>
             <li>
                 <small>Reads</small>
                 <?php 
-                if($disk->reads > 1000000) {
-                    $k = $disk->reads / 1000000;
+                if($disk->reads > 1048576) {
+                    $k = $disk->reads / 1048576;
                     echo $k > 100 ? floor($k) . 'M' : number_format($k, 1) . 'M';
-                } else if($disk->reads > 1000) {
-                    $k = $disk->reads / 1000;
+                } else if($disk->reads > 1024) {
+                    $k = $disk->reads / 1024;
                     echo $k > 100 ? floor($k) . 'k' : number_format($k, 1) . 'k';
                 } else {
                     echo $disk->reads;
@@ -39,11 +39,11 @@
             <li>
                 <small>Writes</small>
                 <?php 
-                if($disk->writes > 1000000) {
-                    $k = $disk->writes / 1000000;
+                if($disk->writes > 1048576) {
+                    $k = $disk->writes / 1048576;
                     echo $k > 100 ? floor($k) . 'M' : number_format($k, 1) . 'M';
-                } else if($disk->writes > 1000) {
-                    $k = $disk->writes / 1000;
+                } else if($disk->writes > 1024) {
+                    $k = $disk->writes / 1024;
                     echo $k > 100 ? floor($k) . 'k' : number_format($k, 1) . 'k';
                 } else {
                     echo $disk->writes;

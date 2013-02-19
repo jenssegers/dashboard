@@ -10,8 +10,8 @@
         <?php endif; ?>
         
         <?php 
-        $mb = $adapter->total / 1000000;
-        echo $mb > 1000 ? number_format($mb/1000, 1) . ' GB' : number_format($mb, 1) . ' MB';
+        $mb = $adapter->total / 1048576;
+        echo $mb > 1024 ? number_format($mb/1024, 1) . ' GB' : number_format($mb, 1) . ' MB';
         ?>
         
         <?php if(isset($adapter->ip)): ?>
@@ -24,15 +24,15 @@
             <li>
                 <small>Sent</small>
                 <?php 
-                $mb = $adapter->sent / 1000000;
-                echo $mb > 1000 ? round($mb/1000, 1) . ' GB' : round($mb, 1) . ' MB';
+                $mb = $adapter->sent / 1048576;
+                echo $mb > 1024 ? round($mb/1024, 1) . ' GB' : round($mb, 1) . ' MB';
                 ?>
             </li>
             <li>
                 <small>Received</small>
                 <?php 
-                $mb = $adapter->received / 1000000;
-                echo $mb > 1000 ? round($mb/1000, 1) . ' GB' : round($mb, 1) . ' MB';
+                $mb = $adapter->received / 1048576;
+                echo $mb > 1024 ? round($mb/1024, 1) . ' GB' : round($mb, 1) . ' MB';
                 ?>
             </li>
             <li>
