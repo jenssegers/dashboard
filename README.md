@@ -10,10 +10,6 @@ Clone the repository to your webserver:
 
     git clone https://github.com/segersjens/dashboard.git
 
-Allow apache to read memory information:
-
-    usermod -a -G kmem www-data
-
 Example
 -------
 

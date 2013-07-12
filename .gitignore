@@ -11,16 +11,3 @@ ehthumbs.db
 Thumbs.db
 *~
 *.swp
-
-##########################
-# Editor generated files #
-##########################
-.settings
-.buildpath
-.project
-
-################
-# Config files #
-################
-config/development.json
-config/production.json

@@ -58,15 +58,31 @@ class Disks {
             /* --------------------------------------------------------------
              * Disk usage
              * -------------------------------------------------------------- */
-            foreach ($partitions as $partition) {
+            foreach ($partitions as $partition)
+            {
                 $part = $partition[4];
 
-                if (strpos($part, $drive) !== FALSE) {
+                if (strpos($part, $drive) !== FALSE)
+                {
                     $df = array(); exec('df /dev/' . $part, $df);
 
-                    if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)#', $df[1], $matches)) {
+                    if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+(.*)#', $df[1], $matches))
+                    {
                         $this->{$drive}->used += $matches[2] * 1024;
                         $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
+
+                        # virtual drive fix
+                        if ($matches[2] == 0 && $part == 'vda')
+                        {
+                            # assume main drive
+                            $df = array(); exec('df /', $df);
+
+                            if (@preg_match('#\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+(.*)#', $df[1], $matches))
+                            {
+                                $this->{$drive}->used += $matches[2] * 1024;
+                                $this->{$drive}->percentage = $this->{$drive}->used / $this->{$drive}->size * 100;
+                            }
+                        }
                     }
                 }
             }
