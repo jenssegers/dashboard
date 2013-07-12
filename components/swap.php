@@ -22,8 +22,18 @@ class Swap {
                 }
             }
 
-            $this->used = $this->total - $this->free;
-            $this->percentage = $this->used / $this->total * 100;
+            if ($this->total)
+            {
+                $this->used = $this->total - $this->free;
+                $this->percentage = $this->used / $this->total * 100;
+            }
+            // there is no swap
+            else
+            {
+                $this->used = 0;
+                $this->percentage = 0;
+            }
+            
         }
     }
 
