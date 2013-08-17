@@ -13,7 +13,7 @@ Clone the repository to your webserver:
 Example
 -------
 
-![Dashboard example](http://jenssegers.be/uploads/2013/02/19/dashboard.png)
+![Dashboard example](http://jenssegers.be/uploads/images/dashboard.png)
 
 Features
 --------

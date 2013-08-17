@@ -29,20 +29,20 @@ class Memory {
             }
 
             $this->used = $this->total - $this->free - $this->cached - $this->buffers;
-            $this->percentage = $this->used / $this->total * 100;
+            $this->percentage = (1 - ($this->free / $this->total)) * 100;
         }
 
         /* --------------------------------------------------------------
          * Get (better?) used memory from 'free -m'
          * -------------------------------------------------------------- */
-        exec('free -k', $free);
+        /*exec('free -k', $free);
 
         if ($free) {
             $free = preg_split('#\s+#', $free[2]);
 
             $this->used = $free[2];
             $this->free = $free[3];
-        }
+        }*/
 
         /* --------------------------------------------------------------
          * dmidecode

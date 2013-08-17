@@ -6,6 +6,14 @@
         else
             echo "Memory";
         ?>
+
+        <?php 
+        if ($system->memory->total > 1000000) {
+            echo number_format($system->memory->total / 1000000, 2) . ' GB';
+        } else {
+            echo round($system->memory->total / 1024) . ' MB';
+        }
+        ?>
     </div>
         <?php if ($system->memory->percentage < 70): ?>
             <div class="state green">
@@ -19,16 +27,28 @@
     <div class="information">
         <ul>
             <li>
-                <small>Total</small>
-                <?php echo round($system->memory->total / 1024); ?> MB
+                <small>Cached</small>
+                <?php
+                if ($system->memory->cached > 1048576) {
+                    echo number_format($system->memory->cached / 1048576, 2) . ' GB';
+                } else {
+                    echo round($system->memory->cached / 1024) . ' MB';
+                }
+                ?>
+            </li>
+            <li>
+                <small>Buffers</small>
+                <?php
+                if ($system->memory->buffers > 1048576) {
+                    echo number_format($system->memory->buffers / 1048576, 2) . ' GB';
+                } else {
+                    echo round($system->memory->buffers / 1024) . ' MB';
+                }
+                ?>
             </li>
             <li>
                 <small>Free</small>
-                <?php echo round($system->memory->free / 1024); ?> MB
-            </li>
-            <li>
-                <small>Percent.</small>
-                <?php echo round($system->memory->percentage); ?>%
+                <?php echo round(100 - $system->memory->percentage); ?>%
             </li>
         </ul>
     </div>
