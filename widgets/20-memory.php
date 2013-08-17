@@ -11,13 +11,13 @@
         if ($system->memory->total > 1000000) {
             echo number_format($system->memory->total / 1000000, 2) . ' GB';
         } else {
-            echo round($system->memory->total / 1024) . ' MB';
+            echo round($system->memory->total / 1000) . ' MB';
         }
         ?>
     </div>
-        <?php if ($system->memory->percentage < 70): ?>
+        <?php if ($system->memory->percentage < 75): ?>
             <div class="state green">
-        <?php elseif ($system->memory->percentage < 80): ?>
+        <?php elseif ($system->memory->percentage < 90): ?>
             <div class="state yellow">
         <?php else: ?>
             <div class="state red">
