@@ -8,7 +8,7 @@ Installation
 
 Clone the repository to your webserver:
 
-    git clone https://github.com/segersjens/dashboard.git
+    git clone https://github.com/jenssegers/dashboard.git
 
 Example
 -------
