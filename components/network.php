@@ -22,6 +22,7 @@ class Network {
 
             $this->{$adapter} = new stdClass;
             $this->{$adapter}->state = $state;
+            $this->{$adapter}->speed = read('/sys/class/net/' . $adapter . '/speed');
             $this->{$adapter}->received = $parts[1];
             $this->{$adapter}->sent = $parts[9];
             $this->{$adapter}->total = $this->{$adapter}->sent + $this->{$adapter}->received;

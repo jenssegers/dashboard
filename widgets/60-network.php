@@ -2,6 +2,7 @@
 <div class="component">
     <div class="header">
         Ethernet <?php echo $name; ?>
+        <?php if ($adapter->speed) echo $adapter->speed . ' MBIT'; ?>
     </div>
         <?php if($adapter->state == 'up'): ?>
         <div class="state green">
