@@ -3,7 +3,7 @@
 body {
     background: none repeat scroll 0 0 #131416;
     color: #D5D7D6;
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     text-shadow: 1px 1px 1px #333333;
 }
 
@@ -19,7 +19,6 @@ a {
 
 h1 {
     color: #F1F1F1;
-    font-family: 'Open Sans', sans-serif;
     font-size: 67px;
     font-weight: normal;
     line-height: 1.1em;
@@ -54,7 +53,7 @@ h1 {
     background-image: -moz-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
     background-image: -webkit-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
     background-image: -ms-linear-gradient(left top, rgb(32,36,39) 0%, rgb(19,19,21) 100%);
-    
+
     background-image: -webkit-gradient(
         linear,
         left top,
@@ -66,7 +65,7 @@ h1 {
 
 .header {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     margin: 5px 10px;
     text-transform: uppercase;
     background-image: url("icon.png");
@@ -80,12 +79,10 @@ h1 {
 .state {
     padding: 15px 0;
     font-size: 50px;
-    /*padding-left: 36px;*/
-    /*margin-left: 15px;*/
     background-position: left 50%;
     background-repeat: no-repeat;
     text-align: center;
-    font-weight: bold;
+    font-weight: 600;
     display: inline-block;
     margin: auto;
     line-height: 45px;
@@ -172,9 +169,9 @@ h1 {
     #container {
         width: 550px;
     }
-    
+
     h1 {
-        font-size: 55px;    
+        font-size: 55px;
     }
 }
 
@@ -182,8 +179,8 @@ h1 {
     #container {
         width: 275px;
     }
-    
+
     h1 {
-        font-size: 32px;    
+        font-size: 32px;
     }
 }
