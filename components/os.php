@@ -15,11 +15,11 @@ class OS {
         /* --------------------------------------------------------------
          * Get real remote ip
          * -------------------------------------------------------------- */
-        $ip = @file_get_contents('http://checkip.dyndns.org');
+        $ip = simplexml_load_string(@file_get_contents('http://geoip.ubuntu.com/lookup'));
 
-        if ($ip) {
-            preg_match('/Current IP Address: ([0-9a-f:\.]+)/', $ip, $matches);
-            $this->ip = $matches[1];
+
+        if ($ip && $ip->Ip) {
+            $this->ip = $ip->Ip;
         }
     }
 
