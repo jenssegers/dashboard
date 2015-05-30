@@ -17,6 +17,9 @@
         
         <?php if(isset($adapter->ip)): ?>
         <small <?php echo $adapter->state == "up" ? 'class="green"' : ''; ?>><?php echo $adapter->ip; ?></small>
+        <?php if(isset($system->os->ip)):?>
+        <small class="green"><?php echo $system->os->ip; ?></small>
+        <?php endif; ?>
         <?php endif; ?>
 
     </div>
