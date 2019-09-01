@@ -21,7 +21,7 @@ $base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/'
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="<?php echo $base . '/static/dark.css'; ?>">
 </head>
-<body>
+<body onload="init()">
 
 <div id="container">
 
@@ -47,6 +47,23 @@ foreach ($widgets as $widget) {
 ?>
 
 </div>
-
+    <script>
+        function refresh() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("container").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "index.php", true);
+            xhttp.send();
+        }
+        function init() {
+            refresh()
+            var int = self.setInterval(function () {
+                refresh()
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
